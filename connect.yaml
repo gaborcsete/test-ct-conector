@@ -1,20 +1,57 @@
 deployAs:
-  - name: test-ct-conector
+  - name: service
     applicationType: service
     endpoint: /service
     scripts:
-      postDeploy: npm install && npm run build && npm run connector:post-deploy
-      preUndeploy: npm install && npm run build && npm run connector:pre-undeploy
+      postDeploy: npm install && npm run connector:post-deploy
+      preUndeploy: npm install && npm run connector:pre-undeploy
     configuration:
       standardConfiguration:
-        - key: CTP_REGION
-          description: commercetools Composable Commerce API region
-      securedConfiguration:
         - key: CTP_PROJECT_KEY
-          description: commercetools Composable Commerce project key
+          description: Project key of the commercetools Composable Commerce Project
+        - key: CTP_REGION
+          description: Region where the commercetools Composable Commerce Project is hosted
+      securedConfiguration:
         - key: CTP_CLIENT_ID
-          description: commercetools Composable Commerce client ID
+          description: client_id of an API Client for the commercetools Composable Commerce Project
         - key: CTP_CLIENT_SECRET
-          description: commercetools Composable Commerce client secret
+          description: secret of an API Client for the commercetools Composable Commerce Project
         - key: CTP_SCOPE
-          description: commercetools Composable Commerce client scope
+          description: scope of an API Client for the commercetools Composable Commerce Project
+  - name: job
+    applicationType: job
+    endpoint: /job
+    properties:
+      schedule: "*/5 * * * *"
+    configuration:
+      standardConfiguration:
+        - key: CTP_PROJECT_KEY
+          description: Project key of the commercetools Composable Commerce Project
+        - key: CTP_REGION
+          description: Region where the commercetools Composable Commerce Project is hosted
+      securedConfiguration:
+        - key: CTP_CLIENT_ID
+          description: client_id of an API Client for the commercetools Composable Commerce Project
+        - key: CTP_CLIENT_SECRET
+          description: secret of an API Client for the commercetools Composable Commerce Project
+        - key: CTP_SCOPE
+          description: scope of an API Client for the commercetools Composable Commerce Project
+  - name: event
+    applicationType: event
+    endpoint: /event
+    scripts:
+      postDeploy: npm install && npm run connector:post-deploy
+      preUndeploy: npm install && npm run connector:pre-undeploy
+    configuration:
+      standardConfiguration:
+        - key: CTP_PROJECT_KEY
+          description: Project key of the commercetools Composable Commerce Project
+        - key: CTP_REGION
+          description: Region where the commercetools Composable Commerce Project is hosted
+      securedConfiguration:
+        - key: CTP_CLIENT_ID
+          description: client_id of an API Client for the commercetools Composable Commerce Project
+        - key: CTP_CLIENT_SECRET
+          description: secret of an API Client for the commercetools Composable Commerce Project
+        - key: CTP_SCOPE
+          description: scope of an API Client for the commercetools Composable Commerce Project
